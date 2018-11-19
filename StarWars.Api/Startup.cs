@@ -73,17 +73,17 @@ namespace StarWars
         }
         private void InjectGraphQLSchema(IServiceCollection services)
         {
-            services.AddScoped<StarWarsQuery>(); 
-            services.AddScoped<StarWarsMutation>(); 
-            services.AddScoped<IDocumentExecuter, DocumentExecuter>();
-            services.AddScoped<ITrilogyHeroes, TrilogyHeroes>();
-            services.AddTransient<DroidType>();
-            services.AddTransient<HumanType>();
-            services.AddTransient<CharacterInterface>();
-            services.AddTransient<EpisodeEnum>();
+            services.AddSingleton<StarWarsQuery>(); 
+            services.AddSingleton<StarWarsMutation>();
+            services.AddSingleton<ISchema, StarWarsSchema>();
+            services.AddSingleton<IDocumentExecuter, DocumentExecuter>();
+            services.AddSingleton<ITrilogyHeroes, TrilogyHeroes>();
+            services.AddSingleton<DroidType>();
+            services.AddSingleton<HumanType>();
+            services.AddSingleton<CharacterInterface>();
+            services.AddSingleton<EpisodeEnum>();
 
-            var sp = services.BuildServiceProvider();
-            services.AddScoped<ISchema>(_ => new StarWarsSchema(type => (GraphType)sp.GetService(type)) { Query = sp.GetService<StarWarsQuery>(), Mutation = sp.GetService<StarWarsMutation>() });
+            services.AddSingleton<IDependencyResolver>(c => new FuncDependencyResolver(type =>c.GetRequiredService(type)));
 
         }
 

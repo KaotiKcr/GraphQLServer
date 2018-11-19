@@ -2,12 +2,13 @@
 using System.Linq;
 using AutoMapper;
 using GraphQL.Types;
+using StarWars.Core.Data;
 
 namespace StarWars.Api.Models
 {
     public class DroidType : ObjectGraphType<Droid>
     {
-        public DroidType(Core.Data.ICharacterRepository characterRepository, IMapper mapper)
+        public DroidType(ICharacterRepository characterRepository, IMapper mapper)
         {
             Name = "Droid";
             Description = "A mechanical creature in the Star Wars universe.";

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GraphQL.Types;
+using StarWars.Core.Data;
 using StarWars.Core.Logic;
 using System.Collections.Generic;
 
@@ -9,7 +10,7 @@ namespace StarWars.Api.Models
     {
         public StarWarsQuery() { }
 
-        public StarWarsQuery(ITrilogyHeroes trilogyHeroes, Core.Data.IDroidRepository droidRepository, Core.Data.IHumanRepository humanRepository, IMapper mapper)
+        public StarWarsQuery(ITrilogyHeroes trilogyHeroes, IDroidRepository droidRepository, IHumanRepository humanRepository, IMapper mapper)
         {
             Name = "Query";
 
